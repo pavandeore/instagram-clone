@@ -16,7 +16,7 @@ const { data: session } = useSession()
   const [loading, setLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const uploadPost = async() => {
+  const uploadPost = async () => {
     if(loading) return;
     setLoading(true);
 
@@ -25,14 +25,16 @@ const { data: session } = useSession()
     // uplload img to store with id
     // get download url from storage and update post with img
 
-    const docRef = await addDoc(collection(db, 'posts',{
-        username: session?.user?.username+"",
-        caption: captionRef.current.value+"",
-        profileImg: session?.user?.image+"",
+    const docRef = await addDoc(collection(db, 'posts'),{
+        username: session.user.username,
+        caption: captionRef.current.value,
+        profileImg: session.user.image,
         timestamp: serverTimestamp()
-    }))
-    //docRef.id
-    alert(docRef.id)
+    })
+    // console.log("------------------------")
+    // console.log('docrefID')
+    // console.log(docRef.id)
+
 
     const imageRef = ref(storage, `posts/${docRef.id}/image`);
     await uploadString(imageRef, selectedFile, "data_url").then(async snapshot => {
@@ -41,7 +43,7 @@ const { data: session } = useSession()
             image: downloadURL
         })
     });
-
+    
     setOpen(false)
     setLoading(false)
     setSelectedFile(null)
