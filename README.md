@@ -16,6 +16,7 @@ Create console developer account firebase. create new project. get the client an
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 NEXTAUTH_URL=http://localhost:3003/
+API_KEY=
 ```
 
 ## Contributing
